@@ -1,6 +1,10 @@
-const  Sequelize  = require("sequelize");
-const writer = require("./writer");  // models/students.js 파일을 가져옴.
-const writings= require("./writings");
+//const Sequelize = require("sequelize");
+// const Writer = require("./Writer");  // models/students.js 파일을 가져옴.
+// const Writings= require("./Writings");
+
+import Sequelize from"sequelize";
+import Users from "./Users";
+import Posts from "./Posts";
 
 const env = process.env.NODE_ENV || "development";
 const config = require("../config/config")[env]; //mysql 개인 정보를 가져오는 코드? 인듯
@@ -15,13 +19,13 @@ const sequelize = new Sequelize(
 
 db.sequelize = sequelize;
 
-db.writer=writer;  // 2 
-db.writings= writings;
+db.Posts=Posts;  // 2 
+db.Users=Users;
 
-writer.init(sequelize);  // 3
-writings.init(sequelize);
+Posts.init(sequelize);  // 3
+Users.init(sequelize);
 
-writer.associate(db);  // 4
-writings.associate(db);
+Posts.associate(db);  // 4
+Users.associate(db);
 
 module.exports = db;
